@@ -1,38 +1,88 @@
-.App {
-  text-align: center;
+.container {
+  background-color: #003366;
+  height: 100px;
+  width: 720px;
+  margin: 0 auto;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.flag { 
+  width: 40px; height: 40px; background: #0066CC; position: relative;
   color: white;
+  line-height: 80px;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 20px;
+  display: inline-table;
+  cursor: pointer;
 }
-
-.App-link {
-  color: #61dafb;
+.flag:nth-child(odd) {
+  background-color: #0080FF;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flag:nth-child(1) {
+  border-radius: 7px 0px 0px 7px;
+}
+.flag:nth-child(5) {
+  border-radius: 0px 7px 7px 0px;
+}
+.flag:nth-child(2) {
+  width: 100px;
+}
+.flag:nth-child(3) {
+  width: 120px;
+}
+.flag:nth-child(4) {
+  width: 140px;
+}
+.flag:nth-child(5) {
+  width: 120px;
+}
+.flag:nth-child(1):after,
+.flag:nth-child(2)::after,
+.flag:nth-child(3)::after,
+.flag:nth-child(4)::after { 
+  content: ""; 
+  position: absolute; 
+  bottom: 0; 
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 15px solid #0066CC;
+}
+.flag:nth-child(odd)::after {
+  border-left: 15px solid #0080FF ;
+}
+.flag:nth-child(1)::after {
+  left: 40px;
+}
+.flag:nth-child(2)::after {
+  left: 100px;
+}
+.flag:nth-child(3)::after {
+  left: 120px;
+}
+.flag:nth-child(4)::after {
+  left: 140px;
+}
+.flag:nth-child(2):before,
+.flag:nth-child(3)::before,
+.flag:nth-child(4)::before,
+.flag:nth-child(5)::before { 
+  content: ""; 
+  position: absolute; 
+  top: 0; 
+  left: -15px;
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid #0066CC; 
+  border-bottom: 20px solid #0066CC; 
+  border-left: 15px solid transparent;
+}
+.flag:nth-child(odd)::before {
+  border-top: 20px solid #0080FF; 
+  border-bottom: 20px solid #0080FF; 
+}
+i{
+  top: 13px;
+  left: 15px;
+  position: absolute;
 }
