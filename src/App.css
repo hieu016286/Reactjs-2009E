@@ -1,88 +1,116 @@
-.container {
-  background-color: #003366;
-  height: 100px;
-  width: 720px;
-  margin: 0 auto;
-}
-.flag { 
-  width: 40px; height: 40px; background: #0066CC; position: relative;
-  color: white;
-  line-height: 80px;
-  text-align: center;
-  margin-top: 30px;
-  margin-left: 20px;
-  display: inline-table;
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+* {
+  margin: 0;
+  list-style-type: none;
   cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
 }
-.flag:nth-child(odd) {
-  background-color: #0080FF;
+#root {
+  background-color: #E0E0E0;
+  width: 100%;
+  height: 1050px;
 }
-.flag:nth-child(1) {
-  border-radius: 7px 0px 0px 7px;
+#root .menu {
+  padding-top: 20px;
 }
-.flag:nth-child(5) {
-  border-radius: 0px 7px 7px 0px;
+#root .menu > li {
+  width: 240px;
 }
-.flag:nth-child(2) {
-  width: 100px;
+.menu > li > p:hover {
+  color: orange;
+  border-left: 5px solid orange;
+  border-right: 5px solid orange;
 }
-.flag:nth-child(3) {
-  width: 120px;
-}
-.flag:nth-child(4) {
-  width: 140px;
-}
-.flag:nth-child(5) {
-  width: 120px;
-}
-.flag:nth-child(1):after,
-.flag:nth-child(2)::after,
-.flag:nth-child(3)::after,
-.flag:nth-child(4)::after { 
-  content: ""; 
-  position: absolute; 
-  bottom: 0; 
-  width: 0; 
-  height: 0; 
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 15px solid #0066CC;
-}
-.flag:nth-child(odd)::after {
-  border-left: 15px solid #0080FF ;
-}
-.flag:nth-child(1)::after {
-  left: 40px;
-}
-.flag:nth-child(2)::after {
-  left: 100px;
-}
-.flag:nth-child(3)::after {
-  left: 120px;
-}
-.flag:nth-child(4)::after {
-  left: 140px;
-}
-.flag:nth-child(2):before,
-.flag:nth-child(3)::before,
-.flag:nth-child(4)::before,
-.flag:nth-child(5)::before { 
-  content: ""; 
-  position: absolute; 
-  top: 0; 
-  left: -15px;
-  width: 0; 
-  height: 0; 
-  border-top: 20px solid #0066CC; 
-  border-bottom: 20px solid #0066CC; 
-  border-left: 15px solid transparent;
-}
-.flag:nth-child(odd)::before {
-  border-top: 20px solid #0080FF; 
-  border-bottom: 20px solid #0080FF; 
-}
-i{
-  top: 13px;
-  left: 15px;
+.menu > li > p:hover::after {
+  content: ' \25C0';
   position: absolute;
+  top: 38px;
+  left: 225px;
+}
+.menu > li > p:hover::before {
+  content: ' \25BA';
+  position: absolute;
+  top: 38px;
+  left: 2px;
+}
+a {
+  color: grey;
+}
+.menu p:hover a {
+  color: orange;
+}
+i {
+  color: black;
+  margin-right: 10px;
+}
+.menu p:hover i {
+  color: orange;
+}
+span {
+  font-weight: bold;
+  font-size: 20px;
+}
+small {
+  margin-left: 28px;
+}
+.menu > li > p {
+  padding-top: 20px;
+  width: 240px;
+  height: 100px;
+  background-color: white;
+  border-bottom: 1px solid gray;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+#root .menu > li {
+  position: relative;
+}
+.sub-menu {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  display: none;
+}
+.menu > .sub-menu {
+  position: absolute;
+  top: 200px;
+} 
+.sub-menu p {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.sub-menu > li {
+  background-color: white;
+  width: 200px;
+  height: 50px;
+  box-sizing: border-box;
+  border-bottom: 1px solid gray;
+}
+.sub-menu :hover {
+  color: orange;
+}
+li:hover > .sub-menu {
+  display: block
+}
+.menu .sub-menu .sub-menu {
+  top: 50px;
+}
+.search {
+  background-color: white;
+  width: 240px;
+  height: 100px;
+}
+.search input {
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 20px;
+  outline: none;
+  position: relative;
+}
+.search img {
+  position: absolute;
+  top: 35px;
+  right: 30px;
+  width: 30px;
 }
