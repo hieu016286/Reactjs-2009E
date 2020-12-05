@@ -1,123 +1,83 @@
 import React from 'react'
 import './App.css';
-import search from './search--v2.png'
+import Tag from './component/Tag'
 
 class App extends React.Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
-      deepMenu : [
-        {
-          title: 'Home',
-          subTitle: 'sweet home',
-          link: '/home',
-          icon: 'fa fa-home',
-        },
-        {
-          title: 'About',
-          subTitle: 'About us',
-          link: '/about-us',
-          icon: 'fa fa-edit',
-          isActive: true
-        },
-        {
-          title: 'Features',
-          subTitle: 'sweet home',
-          link: '/features',
-          icon: 'fa fa-gift',
-        },
-        {
-          title: 'News',
-          subTitle: 'sweet home',
-          link: '/news',
-          icon: 'fa fa-globe',
-        },
-        {
-          title: 'Blog',
-          subTitle: 'what they say',
-          link: '/blog',
-          icon: 'fas fa-comments',
-          children: [
-            {
-              title: 'Mission',
-              link: '/blog/mission',
-              icon: 'fa fa-globe',
-            },
-            {
-              title: 'Our Team',
-              link: '/blog/our-team',
-              icon: 'fa fa-group',
-              children: [
-                {
-                  title: 'Leyla Sparks',
-                  link: '/blog/our-team/leyla-sparks',
-                  icon: 'fa fa-female',
-                },
-                {
-                  title: 'Gleb Ismailov',
-                  link: '/blog/our-team/gleb-ismailov',
-                  icon: 'fa fa-male',
-                  children: [
-                    {
-                      title: 'About',
-                      link: '/blog/our-team/gleb-ismailov/about',
-                      icon: 'fa fa-leaf',
-                    },
-                    {
-                      title: 'Skills',
-                      link: '/blog/our-team/gleb-ismailov/skills',
-                      icon: 'fa fa-tasks',
-                    }
-                  ]
-                },
-                {
-                  title: 'Viktoria Gibbers',
-                  link: '/blog/our-team/viktoria-gibbers',
-                  icon: 'fa fa-female',
-                },
-              ]
-            },
-          ]
-        },
-        {
-          title: 'Portfolio',
-          subTitle: 'sweet home',
-          link: '/portfolio',
-          icon: 'fa fa-picture-o',
-        },
-        {
-          title: 'Contacts',
-          subTitle: 'drop a line',
-          link: '/contacts',
-          icon: 'fas fa-envelope',
-        },
-      ]
+      userInput : '',
+      ToDoList : []
     }
   }
-  render () {
-    const { deepMenu } = this.state
-    const renderMenu = (deepMenu) => {
-      return deepMenu.map((element, index) => {
-        return (
-          <li key={index}>
-            <p><i className={element.icon}></i><span><a href={element.link}>{element.title}</a></span><br></br><small>{element.subTitle ? element.subTitle : null}</small></p>
-           <ul className="sub-menu">
-            {element.children ? renderMenu(element.children) : null}
-           </ul>
-          </li>
-        )
-      })
+  getValueInput = (e) => {
+    const todo = {text: e.target.value,active:true}
+      this.setState({
+        userInput : todo
+    })
+  }
+  AddElement = (e) => {
+    if(this.state.userInput.text !== undefined && this.state.userInput.text !== '') {
+    this.state.ToDoList.push(this.state.userInput)
+    this.setState({
+      ToDoList : this.state.ToDoList
+    })
+    } else {
+      alert('Mời nhập thông tin')
     }
-  return (
-    <ul className="menu">
-      {renderMenu(deepMenu)}
-      <li className='search'>
-        <input placeholder='search...'></input>
-        <img src={search}></img>
-      </li>
-    </ul>
-  )
+  }
+  Delete = (e) => {
+    const atr = e.target.dataset.key
+    const indexofDelete = parseInt(atr)
+    this.state.ToDoList.splice(indexofDelete,1)
+    this.setState({
+      ToDoList: this.state.ToDoList
+    })
+  }
+  CheckedComplete = (e) => {
+    const atr = e.target.dataset.key
+    this.state.ToDoList[atr].active = !this.state.ToDoList[atr].active
+    this.setState({
+      ToDoList : this.state.ToDoList
+    })
+  }
+  showActive = (e) => {
+    const a = this.state.ToDoList.filter(element => element.active === true)
+    this.setState({
+      ToDoList : a
+    })
+  }
+  showCompleted = (e) => {
+    this.setState({
+      ToDoList : this.state.ToDoList.filter(element => element.active === false)
+    })
+  }
+  showAllTask = (e) => {
+    this.setState({
+      ToDoList : this.state.ToDoList
+    })
+  }
+  render () {
+    return (
+      <div className="container">
+        <h1>REACT TODO APP</h1>
+        <hr/>
+        <div className='main-app'>
+          <div className="top">
+            <form>
+              <input className="InputGetTodo" placeholder='What do you need to do ?' type='text' onChange={this.getValueInput}></input>
+              <p className="SubmitTodo"><i class="fa fa-plus" onClick={this.AddElement}></i></p>
+            </form>
+          </div>
+          <Tag tags={this.state.ToDoList} Delete={this.Delete} CheckedComplete={this.CheckedComplete}/>
+          <div className="bottom">
+            <input type='submit' value='All Task' onClick={this.showAllTask}></input>
+            <input type='submit' value='Active' onClick={this.showActive}></input>
+            <input type='submit' value='Completed' onClick={this.showCompleted}></input>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 export default App;
-
