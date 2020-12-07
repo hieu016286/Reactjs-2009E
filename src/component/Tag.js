@@ -21,10 +21,14 @@ class Tag extends Component {
         <div className="tag-bottom">
           <ul className="TodoList">
             {
-              this.props.tags.map((element, index) => {
+              this.props.filt.map((element, index) => {
               return(
                 <li key={index}>
-                  <input className='checkbox' type='checkbox' onChange={this.props.CheckedComplete} data-key={index}/>
+                 {
+                   element.active
+                   ?  <input className='checkbox' type='checkbox' onChange={this.props.CheckedComplete} data-key={index}/>
+                   :  <input className='checkbox' type='checkbox' onChange={this.props.CheckedComplete} data-key={index} checked/>
+                 }
                   <span>{element.text}</span>
                   <i class="fa fa-times-circle" onClick={this.props.Delete} data-key={index}></i>
                 </li>)

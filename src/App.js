@@ -7,7 +7,8 @@ class App extends React.Component {
     super()
     this.state = {
       userInput : '',
-      ToDoList : []
+      ToDoList : [],
+      filt : []
     }
   }
   getValueInput = (e) => {
@@ -20,7 +21,8 @@ class App extends React.Component {
     if(this.state.userInput.text !== undefined && this.state.userInput.text !== '') {
     this.state.ToDoList.push(this.state.userInput)
     this.setState({
-      ToDoList : this.state.ToDoList
+      ToDoList : this.state.ToDoList,
+      filt : this.state.ToDoList
     })
     } else {
       alert('Mời nhập thông tin')
@@ -31,30 +33,30 @@ class App extends React.Component {
     const indexofDelete = parseInt(atr)
     this.state.ToDoList.splice(indexofDelete,1)
     this.setState({
-      ToDoList: this.state.ToDoList
+      ToDoList: this.state.ToDoList,
+      filt : this.state.ToDoList
     })
   }
   CheckedComplete = (e) => {
     const atr = e.target.dataset.key
     this.state.ToDoList[atr].active = !this.state.ToDoList[atr].active
     this.setState({
-      ToDoList : this.state.ToDoList
+      filt : this.state.ToDoList
     })
   }
   showActive = (e) => {
-    const a = this.state.ToDoList.filter(element => element.active === true)
     this.setState({
-      ToDoList : a
+      filt : this.state.ToDoList.filter(element => element.active === true)
     })
   }
   showCompleted = (e) => {
     this.setState({
-      ToDoList : this.state.ToDoList.filter(element => element.active === false)
+      filt : this.state.ToDoList.filter(element => element.active === false)
     })
   }
   showAllTask = (e) => {
     this.setState({
-      ToDoList : this.state.ToDoList
+      filt : this.state.ToDoList
     })
   }
   render () {
@@ -69,7 +71,7 @@ class App extends React.Component {
               <p className="SubmitTodo"><i class="fa fa-plus" onClick={this.AddElement}></i></p>
             </form>
           </div>
-          <Tag tags={this.state.ToDoList} Delete={this.Delete} CheckedComplete={this.CheckedComplete}/>
+          <Tag tags={this.state.ToDoList} Delete={this.Delete} filt={this.state.filt} CheckedComplete={this.CheckedComplete}/>
           <div className="bottom">
             <input type='submit' value='All Task' onClick={this.showAllTask}></input>
             <input type='submit' value='Active' onClick={this.showActive}></input>
